@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nicholas A. Bowen's Project 3 portfolio: an R Shiny differentiability explorer, complete mathematical modeling report, and improved app.R source.">
+  <meta name="theme-color" content="#f5f3ec">
+  <title>Differentiability Explorer | Nicholas A. Bowen</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="identity" href="#top" aria-label="Nicholas A. Bowen, back to top">
+      <span class="monogram" aria-hidden="true">N<span>.</span></span>
+      <span>Nicholas A. Bowen<small>Mathematics &amp; computation</small></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#project">Project</a><a href="#explore">Explore</a><a href="#report">Report</a><a href="#source">Source code <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="tiny-square"></span> Selected work <span class="slash">/</span> Project 03</p>
+        <h1 id="hero-title">Differentiability,<br><em>made visible.</em></h1>
+        <p class="hero-description">When does a curve have a slope? An interactive R Shiny project exploring the connection between continuity, tangent lines, and the derivative.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#source">Explore the code <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="files/modeling-report.pdf" target="_blank" rel="noopener">Read the report <span aria-hidden="true">↗</span></a>
+        </div>
+        <dl class="project-meta">
+          <div><dt>Course</dt><dd>Mathematics in AI</dd></div>
+          <div><dt>Built with</dt><dd>R + Shiny</dd></div>
+          <div><dt>Date</dt><dd>October 2026</dd></div>
+        </dl>
+      </div>
+
+      <div class="explorer" id="explore" aria-labelledby="explore-title">
+        <div class="explorer-heading"><span class="eyebrow" id="explore-title">An interactive illustration</span><span class="live-label"><i></i> Try it</span></div>
+        <div class="formula-row"><span class="math" id="formula">f(x) = x²</span><span class="point-label">at a = <output id="point-value" for="point">1.00</output></span></div>
+        <svg id="function-plot" viewBox="0 0 640 390" role="img" aria-labelledby="plot-title plot-description">
+          <title id="plot-title">Quadratic with a tangent at x = 1</title>
+          <desc id="plot-description">The derivative of x squared at x equals one is two.</desc>
+          <path d="M60 80 Q320 620 580 80" fill="none" stroke="#306b70" stroke-width="4"/>
+        </svg>
+        <div class="plot-key"><span><i class="line function-line"></i> Function</span><span><i class="line tangent-line"></i> <span id="tangent-key">Exact tangent</span></span><span class="slope-value" id="slope-value">f′(a) = 2</span></div>
+        <div class="explorer-controls">
+          <label for="function-select">Function
+            <select id="function-select">
+              <option value="smooth">Quadratic · x²</option><option value="absolute">Absolute value · |x|</option><option value="vertical">Cube root · ∛x</option><option value="corner">Piecewise corner</option><option value="jump">Piecewise jump</option>
+            </select>
+          </label>
+          <div class="point-control"><div><label for="point">Move point a</label><button class="reset-button" id="reset-point" type="button">Go to zero ↺</button></div><input id="point" type="range" min="-1.75" max="1.75" value="1" step="0.01" aria-describedby="explorer-result"></div>
+        </div>
+        <p id="explorer-result" class="explorer-result" aria-live="polite">Both sides support one finite slope. The function is differentiable here.</p>
+        <p class="illustration-note">This illustration uses exact formulas. <a href="#run">Run app.R</a> for the complete Shiny application and numerical diagnostics.</p>
+      </div>
+    </section>
+
+    <div class="project-strip wrap" aria-label="Project focus">
+      <span><b>05</b> Function models</span><span><b>01</b> Central question</span><span class="strip-statement">Continuity is necessary.<br><em>Is it sufficient?</em></span><a href="#findings">See what the examples reveal <span aria-hidden="true">↓</span></a>
+    </div>
+
+    <section class="section wrap overview" id="project" aria-labelledby="project-title">
+      <div class="section-side"><p class="eyebrow">01 / The project</p><h2 id="project-title">From a picture<br>to an explanation.</h2></div>
+      <div class="overview-body"><p class="lead">A connected graph can hide a corner. Matching slopes can grow without bound. This project makes those distinctions easier to examine.</p>
+        <p>For Project 3 in Mathematics in AI, I built a Differentiability Explorer in R Shiny. The application brings together function selection, adjustable graphs, secant and tangent overlays, and numerical comparisons from both sides of a selected point.</p>
+        <p>The five models share one question: do the local slopes approach the same finite value? Comparing the results connects a visual feature of a graph with the calculus definition behind it.</p>
+        <div class="skill-list"><span>Mathematical modeling</span><span>Reactive programming</span><span>Numerical analysis</span><span>Data visualization</span></div>
+      </div>
+    </section>
+
+    <section class="section wrap findings" id="findings" aria-labelledby="findings-title">
+      <div class="section-heading"><div><p class="eyebrow">02 / What the functions reveal</p><h2 id="findings-title">Five functions. Different outcomes.</h2></div><p>These comparisons are at <span class="math-inline">a = 0</span>.<br>Use the illustration above to explore other points.</p></div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Function comparison at zero">
+        <table class="function-table"><caption class="sr-only">Continuity and differentiability of the five project functions at zero</caption>
+          <thead><tr><th scope="col">Function</th><th scope="col">Definition</th><th scope="col">Continuous?</th><th scope="col">Derivative at zero</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><span class="row-num">01</span> Quadratic</th><td class="math-inline">x²</td><td>Yes</td><td><span class="status good">Exists: 0</span></td></tr>
+            <tr><th scope="row"><span class="row-num">02</span> Absolute value</th><td class="math-inline">|x|</td><td>Yes</td><td><span class="status">Unequal slopes: −1, +1</span></td></tr>
+            <tr><th scope="row"><span class="row-num">03</span> Cube root</th><td class="math-inline">∛x</td><td>Yes</td><td><span class="status">Vertical tangent; no finite slope</span></td></tr>
+            <tr><th scope="row"><span class="row-num">04</span> Piecewise corner</th><td>−x if x &lt; 0; 2x otherwise</td><td>Yes</td><td><span class="status">Unequal slopes: −1, +2</span></td></tr>
+            <tr><th scope="row"><span class="row-num">05</span> Jump</th><td>0 if x &lt; 0; 1 otherwise</td><td>No</td><td><span class="status">Discontinuous</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="finding-takeaway"><span aria-hidden="true">↳</span> Differentiability implies continuity. The reverse does not always hold.</p>
+    </section>
+
+    <section class="report-section" id="report" aria-labelledby="report-title">
+      <div class="report-grid wrap"><div class="report-copy"><p class="eyebrow light">03 / The modeling report</p><h2 id="report-title">The mathematical<br>story, in full.</h2><p>My report explains the purpose, mathematical formulation, numerical approach, results, and limitations of the Differentiability Explorer.</p><p class="report-file-meta">PDF DOCUMENT <span>6 PAGES</span> OCTOBER 15, 2026</p><div class="hero-actions"><a class="button cream" href="files/modeling-report.pdf" target="_blank" rel="noopener">Open the report <span aria-hidden="true">↗</span></a><a class="text-link light-link" href="files/modeling-report.pdf" download="Shiny-App-for-Differentiability-Analysis.pdf">Download PDF <span aria-hidden="true">↓</span></a></div><p class="report-version-note">The report documents the project analysis. The source below includes subsequent refinements to the numerical calculations and diagnostic messages.</p></div>
+        <a class="report-preview" href="files/modeling-report.pdf" target="_blank" rel="noopener" aria-label="Open the six-page modeling report"><img src="assets/report-cover.png" width="850" height="1100" loading="lazy" alt="Cover of Shiny App for Differentiability Analysis by Nicholas A. Bowen, Mathematics in AI, October 15, 2026"><span>Shiny App for Differentiability Analysis <span aria-hidden="true">↗</span></span></a>
+      </div>
+      <details class="report-reader wrap"><summary>Read the report on this page <span aria-hidden="true">+</span></summary><object data="files/modeling-report.pdf" type="application/pdf" aria-label="Six-page modeling report"><p>Your browser can open the report using <a href="files/modeling-report.pdf" target="_blank" rel="noopener">this PDF link</a>.</p></object></details>
+    </section>
+
+    <section class="section wrap source-section" id="source" aria-labelledby="source-title">
+      <div class="section-heading"><div><p class="eyebrow">04 / Inside the application</p><h2 id="source-title">The logic behind the picture.</h2></div><a class="button outline" href="app.R" download="app.R">Download app.R <span aria-hidden="true">↓</span></a></div>
+      <p class="source-intro">Browse the working R source, from the five function models to the reactive interface. The refined version checks numerical results against known analytical derivatives and handles precision limits explicitly.</p>
+      <div class="code-shell">
+        <div class="code-topbar"><div><span class="file-icon" aria-hidden="true">R</span><strong>app.R</strong><span class="code-count" id="code-count">R Shiny application</span></div><button class="copy-button" id="copy-code" type="button">Copy code <span aria-hidden="true">⧉</span></button></div>
+        <div class="code-tabs" role="tablist" aria-label="Source code sections">
+          <button type="button" role="tab" id="tab-models" aria-controls="code-panel" aria-selected="true" data-section="models">Function models</button><button type="button" role="tab" id="tab-diagnostics" aria-controls="code-panel" aria-selected="false" tabindex="-1" data-section="diagnostics">Slope diagnostics</button><button type="button" role="tab" id="tab-interface" aria-controls="code-panel" aria-selected="false" tabindex="-1" data-section="interface">Interface</button><button type="button" role="tab" id="tab-server" aria-controls="code-panel" aria-selected="false" tabindex="-1" data-section="server">Reactive server</button><button type="button" role="tab" id="tab-full" aria-controls="code-panel" aria-selected="false" tabindex="-1" data-section="full">Full app.R</button>
+        </div>
+        <div class="code-description" id="code-description">The five models and their analytical derivatives.</div>
+        <div class="code-panel" id="code-panel" role="tabpanel" aria-labelledby="tab-models" tabindex="0"><pre><code id="source-code">Loading the R source…</code></pre></div>
+        <div class="code-footer"><span id="code-range">Source code</span><span>Only dependency: shiny</span></div>
+      </div>
+      <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+      <noscript><p>JavaScript is needed for the source viewer. <a href="app.R" download="app.R">Download the complete app.R file</a>.</p></noscript>
+
+      <div class="improvements"><div><p class="eyebrow">Refinements</p><h3>More careful calculations.<br>Clearer conclusions.</h3><a class="text-link" href="APP_UPDATES.md" download>Read the update notes <span aria-hidden="true">↓</span></a></div><dl><div><dt>Exact answers, separate evidence</dt><dd>An inconclusive numerical result no longer labels a differentiable point as a failure.</dd></div><div><dt>Stable slope calculations</dt><dd>Algebraic identities reduce cancellation. Unusable samples are excluded, and diagnostics stay on the local branch near a corner.</dd></div><div><dt>Results you can inspect</dt><dd>A CSV download preserves the calculations, tolerances, and direct-subtraction comparison. The graph can include the selected secant endpoint.</dd></div></dl></div>
+    </section>
+
+    <section class="run-section wrap" id="run" aria-labelledby="run-title"><div><p class="eyebrow">05 / Try the complete app</p><h2 id="run-title">Open it in RStudio.</h2><p>Download <a href="app.R" download="app.R">app.R</a>, install Shiny once, then open the file in RStudio and click <strong>Run App</strong>.</p></div><div class="install-block"><span class="eyebrow">R console · one-time setup</span><pre><code>install.packages("shiny")</code></pre><p>The complete Shiny app runs in R. The illustration on this portfolio runs directly in your browser.</p></div></section>
+  </main>
+  <footer class="site-footer wrap"><div><strong>Nicholas A. Bowen</strong><span>Mathematics in AI · Project 3 · 2026</span></div><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
+</body>
+</html>
